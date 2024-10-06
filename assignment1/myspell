@@ -1,0 +1,10 @@
+#!/bin/bash
+
+
+DICTIONARY=/usr/share/dict/linux.words
+
+
+tr 'A-Z' 'a-z' < /dev/stdin | tr -cs 'a-z\-''\n' '[\n*]' | grep -v '^-*$' | sort -u | comm -23 - <(tr 'A-Z' 'a-z' < "$DICTIONARY" | tr -cs 'a-z\-''\n' '[\n*]' | grep -v '^-*$' | sort -u)
+
+
+

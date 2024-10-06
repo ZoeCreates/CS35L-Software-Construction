@@ -1,0 +1,86 @@
+1. [classzxi@lnxsrv11 ~]$ which sh
+/usr/bin/sh
+[classzxi@lnxsrv11 ~]$ which sleep
+/usr/local/cs/bin/sleep
+[classzxi@lnxsrv11 ~]$ which type
+/usr/bin/type
+ 
+2.
+* /usr/bin/seq
+* /usr/bin/sed
+  seq - print a sequence of numbers
+  sed - stream editor for filtering and transforming text
+
+3.
+* /usr/local/cs/bin/emacs
+* What is actually executed: /usr/local/cs/emacs-29.1/bin/emacs-29.1
+
+4. 
+
+[classzxi@lnxsrv11 ~]$ /usr/bin/gcc --version
+gcc (GCC) 8.5.0 20210514 (Red Hat 8.5.0-4)
+Copyright (C) 2018 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+[classzxi@lnxsrv11 ~]$ gcc --version
+gcc (GCC) 13.2.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+They are different programs because they do have different versions. 
+
+5. Symbolic mode u+sx,o-w in chmod.
+This adds (+) execute (x) permission to the user (u) and removes (-) write (w) permission from others (o).
+
+
+6.
+* /usr/local/cs
+* /usr/local/cs/autoconf-2.72
+* /usr/local/cs/autoconf-2.72/bin
+* /usr/local/cs/autoconf-2.72/share
+* /usr/local/cs/autoconf-2.72/share/autoconf
+
+7.  9841
+8.  371
+9. 
+lrwxrwxrwx.  1 root root       15 Aug 12  2018 libbz2.so.1 -> libbz2.so.1.0.6. (this is my oldest file)
+
+10. transpose-chars                                                                                                                                         
+transpose-lines
+transpose-paragraphs
+transpose-regions                                                                                              
+transpose-sentences                                                                        
+transpose-sexps
+transpose-subr
+transpose-subr-1
+transpose-words  
+
+
+11.
+yank is an interactive byte-compiled Lisp function in ‘simple.el’.
+It is bound to C-y, S-<insertchar> and S-<insert>.
+It can also be invoked from the menu: Edit → Paste
+
+How do I invoke it? Invoke it with Ctrl-y.
+
+12. 
+* [classzxi@lnxsrv11 ~]$ ps -ef | grep classzxi
+* root     1570565    1235  0 20:26 ?        00:00:00 sshd: classzxi [priv]
+* classzxi 1570573       1  0 20:26 ?        00:00:00 /usr/lib/systemd/systemd --user
+* classzxi 1570578 1570573  0 20:26 ?        00:00:00 (sd-pam)
+* classzxi 1570587 1570565  0 20:26 ?        00:00:00 sshd: classzxi@pts/3
+* classzxi 1570589 1570587  0 20:26 pts/3    00:00:00 -bash
+* classzxi 1570617 1570573  0 20:26 ?        00:00:00 /usr/bin/dbus-daemon --session --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+* classzxi 1570620 1570573  0 20:26 ?        00:00:00 /usr/libexec/gvfsd
+* classzxi 1572586 1570589  0 21:31 pts/3    00:00:00 ps -ef
+* classzxi 1572587 1570589  0 21:31 pts/3    00:00:00 grep --color=auto classzxi
+
+
+
+ 
+
+
+
