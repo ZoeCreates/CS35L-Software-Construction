@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Check if two arguments are given
+if [ "$#" -ne 2 ]; then
+    echo "Usage: $0 <release1> <release2>"
+    exit 1
+fi
+
+# Navigate to the tzdb repository directory
+cd /u/eng/class/classzxi/tz
+
+# Use git diff to compare the two releases
+git diff $1 $2

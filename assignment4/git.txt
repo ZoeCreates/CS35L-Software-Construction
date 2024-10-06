@@ -1,0 +1,15 @@
+classzxi@lnxsrv11 /u/cs/fac/eggert/src/github/git]$ git branch
+  maint
+* master
+  next
+  seen
+  todo
+
+
+but for the output of the loacal git branch:
+
+[classzxi@lnxsrv11 ~/git]$ git branch
+* master
+
+So for eggert's copy of git's repository, it is sitting there as one of the branches eggers have, but f\
+or my local git's repository, it is the only branch I got in my local.

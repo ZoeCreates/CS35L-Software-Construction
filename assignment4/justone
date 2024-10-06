@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Navigate to the repository directory
+cd /u/eng/class/classzxi/tz
+
+# Get the current and previous commit hashes
+current_commit="d4d3c3ba2361c413b765ac02c7ffea6d4ce44152"
+previous_commit="9fc11a27163ee5e59214d49711142c5750040e98"
+
+# Display the difference between the current and previous commits
+git diff $previous_commit $current_commit

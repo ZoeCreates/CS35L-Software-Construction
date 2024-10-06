@@ -1,0 +1,47 @@
+Firstly I use this command git log --grep="merge-tree" --oneline  to find out the commits related to merge-tree. Then git log --grep="merge-tree" --since="2022-07-01" --until="2022-12-12" --oneline helps me narrow down the search to commits made before 2022-12-12 but after the previous release. In the output I found out two commits with message that’s possibly descripting a fix to the segfault listed below:
+
+
+
+bcf22f29df Merge branch 'js/merge-ort-in-read-only-repo' into maint-2.38
+
+19118cb857 Merge branch 'js/merge-ort-in-read-only-repo'
+
+
+I then use the command git show to inspect those commits and confirmed my answer:
+
+[classzxi@lnxsrv11 ~/git]$ git show bcf22f29df
+commit bcf22f29df87f25582de0ac9274d1567fa16be6f
+Merge: 7f8a6caee5 92481d1b26
+Author: Junio C Hamano <gitster@pobox.com>
+Date:   Tue Oct 25 17:11:34 2022 -0700
+
+    Merge branch 'js/merge-ort-in-read-only-repo' into maint-2.38
+    
+    In read-only repositories, "git merge-tree" tried to come up with a
+    merge result tree object, which it failed (which is not wrong) and
+    led to a segfault (which is bad), which has been corrected.
+    
+    * js/merge-ort-in-read-only-repo:
+      merge-ort: return early when failing to write a blob
+      merge-ort: fix segmentation fault in read-only repositories
+
+
+[classzxi@lnxsrv11 ~/git]$ git show 19118cb857
+commit 19118cb8570e499e1a56e81740cee3d1c1206b44
+Merge: a215853545 92481d1b26
+Author: Junio C Hamano <gitster@pobox.com>
+Date:   Mon Oct 10 10:08:43 2022 -0700
+
+    Merge branch 'js/merge-ort-in-read-only-repo'
+    
+    In read-only repositories, "git merge-tree" tried to come up with a
+    merge result tree object, which it failed (which is not wrong) and
+    led to a segfault (which is bad), which has been corrected.
+    
+    * js/merge-ort-in-read-only-repo:
+      merge-ort: return early when failing to write a blob
+      merge-ort: fix segmentation fault in read-only repositories
+
+
+
+

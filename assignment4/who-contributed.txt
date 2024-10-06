@@ -1,0 +1,13 @@
+I use this command to search for commits that include the sentence indicated:git log -S"Even newspaper reports present contradictory information." --source --all
+
+
+The output is:
+
+commit c12b432741eed9a422fbf99fa27af6e7a941d88b refs/tags/2012e
+Author: Arthur David Olson <ado@elsie>
+Date:   Thu Dec 21 11:43:42 1995 -0500
+
+    Eggert changes
+    
+    SCCS-file: northamerica
+    SCCS-SID: 7.20

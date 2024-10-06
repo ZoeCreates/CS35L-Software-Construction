@@ -1,0 +1,43 @@
+From 438c2f859b2c8c01c57a6969ec5858c0253cfa69 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?=C3=86var=20Arnfj=C3=B6r=C3=B0=20Bjarmason?=
+ <avarab@gmail.com>
+Date: Mon, 10 Oct 2022 13:38:00 -0700
+Subject: [PATCH] CodingGuidelines: recommend against unportable C99 struct
+ syntax
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Per 33665d98e6b (reftable: make assignments portable to AIX xlc
+v12.01, 2022-03-28) forms like ".a.b = *c" can be replaced by using
+".a = { .b = *c }" instead.
+
+We'll probably allow these sooner than later, but since the workaround
+is trivial let's note it among the C99 features we'd like to hold off
+on for now.
+
+Signed-off-by: Ævar Arnfjörð Bjarmason <avarab@gmail.com>
+Signed-off-by: Junio C Hamano <gitster@pobox.com>
+---
+ Documentation/CodingGuidelines | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/Documentation/CodingGuidelines b/Documentation/CodingGuidelines
+index 9598b45f7e..1d95a142b2 100644
+--- a/Documentation/CodingGuidelines
++++ b/Documentation/CodingGuidelines
+@@ -242,6 +242,11 @@ For C programs:
+      printf("%"PRIuMAX, (uintmax_t)v).  These days the MSVC version we
+      rely on supports %z, but the C library used by MinGW does not.
+ 
++   . Shorthand like ".a.b = *c" in struct initializations is known to
++     trip up an older IBM XLC version, use ".a = { .b = *c }" instead.
++     See the 33665d98 (reftable: make assignments portable to AIX xlc
++     v12.01, 2022-03-28).
++
+  - Variables have to be declared at the beginning of the block, before
+    the first statement (i.e. -Wdeclaration-after-statement).
+ 
+-- 
+2.43.0
+
