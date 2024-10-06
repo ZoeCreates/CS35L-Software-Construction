@@ -1,0 +1,169 @@
+1. Type C-h k C-h k and describe what happens and why.
+
+emacs will display a description of what that key or key combination does, which helps the user undersanting keybindings.
+
+why: When you press C-h k in Emacs, it's waiting for you to input a key sequence to investigate. Pressing C-h k again during this mode means Emacs takes this as the query. So, you end up seeing what C-h k does, as the second C-h k is interpreted as the subject of your inquiry.
+
+below is the documentation for C-h k:
+describe-key is an interactive byte-compiled Lisp function in
+‘help.el’.
+
+It is bound to C-h k, <f1> k and <help> k.
+It can also be invoked from the menu: Help → Describe → Describe Key
+or Mouse Operation...
+
+(describe-key KEY-LIST &optional BUFFER)
+
+Display documentation of the function invoked by KEY-LIST.
+KEY-LIST can be any kind of a key sequence; it can include keyboard events,
+mouse events, and/or menu events.  When calling from a program,
+pass KEY-LIST as a list of elements (SEQ . RAW-SEQ) where SEQ is
+a key-sequence and RAW-SEQ is its untranslated form.
+
+While reading KEY-LIST interactively, this command temporarily enables
+menu items or tool-bar buttons that are disabled to allow getting help
+on them.
+
+Interactively, this command can’t describe prefix commands, but
+will always wait for the user to type the complete key sequence.
+For instance, entering "C-x" will wait until the command has
+been completed, but ‘M-: (describe-key (kbd "C-x")) RET’ will
+tell you what this prefix command is bound to.
+
+BUFFER is the buffer in which to lookup those keys; it defaults to the
+current buffer.
+
+  Probably introduced at or before Emacs version 22.1.
+
+
+2. Type C-h k M-SPC and describe what happens and why.
+
+the documentation of M-SPC pops out. This is beacuse the emacs is waiting for me to input a key sequence to investigate after I press C-h k, and if i put M-SPC and pres enter again it will show the documentaion for the command M-SPC.
+
+below is the documentation for M-SPC:
+M-SPC runs the command cycle-spacing (found in global-map), which is
+an interactive byte-compiled Lisp function in ‘simple.el’.
+ 
+It is bound to M-
+ 
+(cycle-spacing &optional N)
+
+Manipulate whitespace around point in a smart way.
+Repeated calls perform the actions in ‘cycle-spacing-actions’ one
+after the other, wrapping around after the last one.
+
+All actions are amendable using a prefix arg N.  In general, a
+zero or positive prefix arg allows only for deletion of tabs and
+spaces whereas a negative prefix arg also allows for deleting
+newlines.
+
+The prefix arg given at the first invocation starting a cycle is
+provided to all following actions, i.e.,
+    - M-SPC M-SPC M-SPC
+is equivalent to
+    - M-SPC - M-SPC - M-SPC.
+
+A new sequence can be started by providing a different prefix arg
+than provided at the initial invocation (except for 1), or by
+doing any other command before the next M-SPC.
+
+  Probably introduced at or before Emacs version 24.4.
+
+
+HW:
+1. Consider the old-fashioned Python 2 script randline.py.
+
+What happens when this script is invoked on an empty file like /dev/null, and why?
+A:
+-what happend:
+the terminal outputs what's below:
+Traceback (most recent call last):
+  File "randline.py", line 70, in <module>
+    main()
+  File "randline.py", line 64, in main
+    sys.stdout.write(generator.chooseline())
+  File "randline.py", line 34, in chooseline
+    return random.choice(self.lines)
+  File "/usr/lib64/python2.7/random.py", line 277, in choice
+    return seq[int(self.random() * len(seq))]  # raises IndexError if seq is empty
+IndexError: list index out of range
+
+-why:
+the code in the script was tryign to choose a line randomly from the file but the file is empty, so the line "random.choice(sele.lines)"would return false and raise the IndexError, since the output says  return seq[int(self.random() * len(seq))]  # raise  IndexError if seq is empty
+IndexError: list index out of range
+
+
+4.What happens when this script is invoked with Python 3 rather than Python 2, and why? (You can run Python 3 on the SEASnet hosts by using the command python3 instead of python2.)
+-what happened in my terminal is it returns a syntax error like below:
+[classzxi@lnxsrv11 ~]$ python3 randline.py /dev/null
+  File "/w/home.15/class/classzxi/randline.py", line 65
+    except IOError as (errno, strerror):
+                      ^
+SyntaxError: invalid syntax
+
+-why:
+the debugger was pointing at the line with except, so the 'except' has a syntax error. The 'except' syntax is valid in python 2 but not python 3 basically.  
+
+5.
+
+a)For me, the python2 and python3 does not output diffrent stuff and it might because i installed python2.7 verion. i suppose pytho2might have some syntax erroros since the script usese features and syntax compatible to python3. The argpare is for example for python3 environment.   
+
+b)For /usr/bin/python3 shuf.py:
+
+Median Time: 1.101 seconds
+For /usr/local/cs/bin/python3 shuf.py:
+
+Median Time: 0.813 seconds
+For GNU Coreutils /usr/local/cs/bin/shuf:
+
+Median Time: 0.067 seconds
+
+I think python3 is running a longer time in average than GNU Coreutils.
+
+C) CPU and Operating System info:
+[classzxi@lnxsrv11 ~]$ lscpu
+Architecture:        x86_64
+CPU op-mode(s):      32-bit, 64-bit
+Byte Order:          Little Endian
+CPU(s):              4
+On-line CPU(s) list: 0-3
+Thread(s) per core:  1
+Core(s) per socket:  4
+Socket(s):           1
+NUMA node(s):        1
+Vendor ID:           GenuineIntel
+CPU family:          6
+Model:               85
+Model name:          Intel(R) Xeon(R) Silver 4116 CPU @ 2.10GHz
+Stepping:            4
+CPU MHz:             2095.075
+BogoMIPS:            4190.15
+Hypervisor vendor:   Microsoft
+Virtualization type: full
+L1d cache:           32K
+L1i cache:           32K
+L2 cache:            1024K
+L3 cache:            16896K
+NUMA node0 CPU(s):   0-3
+Flags:               fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology cpuid pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch invpcid_single pti ibrs ibpb stibp fsgsbase bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx avx512f avx512dq rdseed adx smap clflushopt avx512cd avx512bw avx512vl xsaveopt xsavec xsaves
+
+
+OS system:
+[classzxi@lnxsrv11 ~]$ cat /etc/os-release
+NAME="Red Hat Enterprise Linux"
+VERSION="8.5 (Ootpa)"
+ID="rhel"
+ID_LIKE="fedora"
+VERSION_ID="8.5"
+PLATFORM_ID="platform:el8"
+PRETTY_NAME="Red Hat Enterprise Linux 8.5 (Ootpa)"
+ANSI_COLOR="0;31"
+CPE_NAME="cpe:/o:redhat:enterprise_linux:8::baseos"
+HOME_URL="https://www.redhat.com/"
+DOCUMENTATION_URL="https://access.redhat.com/documentation/red_hat_enterprise_linux/8/"
+BUG_REPORT_URL="https://bugzilla.redhat.com/"
+
+REDHAT_BUGZILLA_PRODUCT="Red Hat Enterprise Linux 8"
+REDHAT_BUGZILLA_PRODUCT_VERSION=8.5
+REDHAT_SUPPORT_PRODUCT="Red Hat Enterprise Linux"
+REDHAT_SUPPORT_PRODUCT_VERSION="8.5"
